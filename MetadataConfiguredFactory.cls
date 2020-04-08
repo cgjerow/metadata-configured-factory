@@ -39,11 +39,6 @@ public with sharing virtual class MetadataConfiguredFactory
             );
         }
     }
-
-    // public void setTestCase(String testCase)
-    // {
-    //     testCase = testCase;
-    // }
-
+    
     public class MetadataConfiguredFactoryException extends Exception {}
 }
