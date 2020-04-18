@@ -7,6 +7,20 @@ public with sharing virtual class MetadataConfiguredFactory
 
     public Object getClassInstance(String configurationName)
     {
+        try {
+            return this.getClass(configurationName).newInstance();
+        }
+        catch(Exception e)
+        {
+            throw new MetadataConfiguredFactory.MetadataConfiguredFactoryException(
+                'Error instantiating the following Apex Class: ' + this.classConfigurations.get(configurationName).Apex_Class_Name__c
+                + '. ' + e.getMessage()
+            );
+        }
+    }
+
+    public Type getClass(String configurationName)
+    {
         if (this.classConfigurations.get(configurationName)==null)
         {
             try {
@@ -29,12 +43,12 @@ public with sharing virtual class MetadataConfiguredFactory
             }
         }
         try {
-            return Type.forName(this.classConfigurations.get(configurationName).Apex_Class_Name__c).newInstance();
+            return Type.forName(this.classConfigurations.get(configurationName).Apex_Class_Name__c);
         }
         catch(Exception e)
         {
             throw new MetadataConfiguredFactory.MetadataConfiguredFactoryException(
-                'Error instantiating the following Apex Class: ' + this.classConfigurations.get(configurationName).Apex_Class_Name__c
+                'Error retrieving the following Apex Class Type: ' + this.classConfigurations.get(configurationName).Apex_Class_Name__c
                 + '. ' + e.getMessage()
             );
         }
