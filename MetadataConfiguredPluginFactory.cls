@@ -1,4 +1,4 @@
-public with sharing virtual class MetadataConfiguredFactory 
+public with sharing virtual class MetadataConfiguredPluginFactory 
 {
     private Map<String,Apex_Factory_Configuration__mdt> classConfigurations 
             = new Map<String,Apex_Factory_Configuration__mdt>();
@@ -12,7 +12,7 @@ public with sharing virtual class MetadataConfiguredFactory
         }
         catch(Exception e)
         {
-            throw new MetadataConfiguredFactory.MetadataConfiguredFactoryException(
+            throw new MetadataConfiguredFactoryException(
                 'Error instantiating the following Apex Class: ' + this.classConfigurations.get(configurationName).Apex_Class_Name__c
                 + '. ' + e.getMessage()
             );
@@ -36,7 +36,7 @@ public with sharing virtual class MetadataConfiguredFactory
             }
             catch(Exception e)
             {
-                throw new MetadataConfiguredFactory.MetadataConfiguredFactoryException(
+                throw new MetadataConfiguredFactoryException(
                     'Error retrieving Apex Factory Configuration with Configuration Name: ' + configurationName 
                     + '. Exactly one non-test configuration should exist.'
                 );
@@ -47,7 +47,7 @@ public with sharing virtual class MetadataConfiguredFactory
         }
         catch(Exception e)
         {
-            throw new MetadataConfiguredFactory.MetadataConfiguredFactoryException(
+            throw new MetadataConfiguredFactoryException(
                 'Error retrieving the following Apex Class Type: ' + this.classConfigurations.get(configurationName).Apex_Class_Name__c
                 + '. ' + e.getMessage()
             );
